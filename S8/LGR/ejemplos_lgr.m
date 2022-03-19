@@ -12,6 +12,12 @@ figure
 rlocus(f)
 title('LGR de $F(s)=\frac{s+3}{s(s+2)}$','Interpreter','latex')
 
+
+f=tf([1 3],[1 2 0])*tf([1 3],1);
+figure
+rlocus(f)
+title('LGR de $F(s)=\frac{(s+3)^2}{s(s+2)}$','Interpreter','latex')
+
 a= conv([1 0],[1 4]);
 b= conv(a,[1 6]);
 c= conv(b,[1 1.4 1]);
