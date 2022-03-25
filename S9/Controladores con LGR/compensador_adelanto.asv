@@ -20,17 +20,16 @@ legend('Sistema deseado')
 %---------sistema en lazo abierto con G_c(s)=(s+z)/(s+p)---
 %----------Encontrando angulo faltante------
 ang = rad2deg(angle(4/(s1*(s1+2))));
-angf= 180-ang;
-phi=70;
-theta=phi-angf;
+theta=40;
+phi=30+theta;
 
 % phi=90;
-% theta=phi-angf;
+% theta=phi-30;
 %---------encontrando el cero y el polo---
 x1=imag(s1)/tand(phi);
 x2=imag(s1)/tand(theta);
-z=x1+abs(real(s1));
-p=x2+abs(real(s1));
+z=x1+real(;
+p=x2+2;
 
 
 gc=tf([1 z],[1 p]);
