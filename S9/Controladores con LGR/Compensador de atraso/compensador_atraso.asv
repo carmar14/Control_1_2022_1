@@ -17,7 +17,7 @@ gr=feedback(g,1);
 pzmap(gr)
 title('Mapa de polos y ceros sin compensador')
 figure
-step(gr)
+s
 [p z] = pzmap(gr);
 
 %polos dominantes: 

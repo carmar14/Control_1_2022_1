@@ -5,6 +5,9 @@ close all
 %---------sistema en lazo abierto---
 g=tf(4,[1 2 0]);
 rlocus(g)
+figure
+g_cl=feedback(g,1);
+step(g_cl)
 %---------sistema en lazo abierto---
 
 %----------polos deseados-----------
@@ -21,7 +24,7 @@ legend('Sistema deseado')
 %----------Encontrando angulo faltante------
 ang = rad2deg(angle(4/(s1*(s1+2))));
 angf= 180-ang;
-phi=70;
+phi=90;
 theta=phi-angf;
 
 % phi=90;
@@ -34,8 +37,9 @@ p=x2+abs(real(s1));
 
 
 gc=tf([1 z],[1 p]);
-
 ol=gc*g;
+%----verificamos condicion del angulo---
+ang = rad2deg(angle(4*(s1+z)/(s1*(s1+2)*(s1+p))));
 figure
 rlocus(ol)
 %---------sistema en lazo abierto con G_c(s)---
