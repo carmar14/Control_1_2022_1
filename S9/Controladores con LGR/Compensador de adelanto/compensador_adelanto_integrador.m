@@ -81,19 +81,30 @@ subplot(1,2,2)
 pzmap(cl,'k')
 title('Sistema compensado')
 %----------compensador usando operacionales-------
-%------red de adelanto-
+%comparador
+R1=10e3;
+R2=R1;
+R3=R1;
+R4=R1;
+%------red de adelanto-atraso-----
 C1=10e-6;
 C2=C1;
-R1=1/(z*C1);
-R2=1/(p*C2);
-R3=10e3;
-R4=K*R3;
+R1c=1/(z*C1);
+R2c=1/(p*C2);
+R3c=10e3;
+R4c=K*R3c;
 
+K_c=R4c*C1/(R3c*C2);
+z=1/(R1c*C1);
+p=1/(R2c*C2);
 
-K_c=R4*C1/(R3*C2);
-z=1/(R1*C1);
-p=1/(R2*C2);
-Gc=tf(K_c*[1 z],[1 p]);
+%----integrador----
+Ri=10e3;
+Ci=100e-6;
+
+R=10e3;
+
+Gc=tf(K_c*[1 z],[1 p])*tf(1, [Ri*Ci 0]);
 s_con=feedback(Gc*g,1)
 figure
 step(s_con,'k')
