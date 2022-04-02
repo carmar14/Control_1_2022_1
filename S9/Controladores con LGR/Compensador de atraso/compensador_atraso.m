@@ -36,13 +36,16 @@ sis_d=tf(wn^2,pol); %sistema deseado
 so = 100*exp(-e*pi/sqrt(1-e^2))
 Ts= 4/(e*wn)
 % constante Kv actual
-Kv_a=0.53
+Kv_a=0.53;
+Kv=5;
 % se desea Kv cerca a 5 la razón es 9.43, se puede acerca a 10 para fines
 % practicos
 
 %------G_c(s)=(s+z)/(s+p)-----
-z=0.05;
+razon= 10 ;%Kv/Kv_a;
 p=0.005;
+z=razon*p; %0.05;
+
 cond_ang= rad2deg(angle((s1+z)/(s1+p)))
 atand((0.33-0.05)/0.586)-atand((0.33-0.005)/0.586)
 
@@ -60,16 +63,18 @@ legend('Nuevo LGR','Antiguo LGR')
 
 %ubicar los nuevos polos dominantes teniendo en cuenta G_c*G
 sis_rc=feedback(g_c*g,1);
-[p z]=pzmap(sis_rc)
+[p1 z1]=pzmap(sis_rc)
 figure
 pzmap(sis_rc)
 title('Mapa de polos y ceros con compensador')
 
 % determinar la ganancia K para ubicar los polos deseados en lazo cerrado
-s1= -0.308+0.566*i;
-s2= -0.308-0.566*i;
-num = 1.06*(s1+0.05);
-den = s1*(s1+0.005)*(s1+1)*(s1+2);
+% s1= -0.309+0.56*i;%0.332+0.466*i;
+% s2= -0.309+0.56*i;%0.332-0.466*i;
+s1= -0.332+0.466*i;
+s2= -0.332-0.466*i;
+num = 1.06*(s1+z);
+den = s1*(s1+p)*(s1+1)*(s1+2);
 
 div = abs(num/den);
 
@@ -83,8 +88,8 @@ e=pol(2)/(2*wn)
 
 
 %sistema completo realimentado
-
-sis_r_c=feedback(K*g_c*g,1)
+g_c = K*g_c;
+sis_r_c=feedback(g_c*g,1)
 figure
 step(gr,'b')
 hold on
@@ -102,8 +107,8 @@ z=0.05;
 p=0.005;
 C1=1000e-6;
 C2=C1;
-R1=1/(C1*0.05);
-R2=1/(C2*0.005);
+R1=1/(C1*z);
+R2=1/(C2*p);
 R3=10e3;
 R4=K*R3;
 
@@ -128,8 +133,8 @@ R4=R1;
 
 C1=1000e-6;
 C2=C1;
-R1c=1/(C1*0.05);
-R2c=1/(C2*0.005);
+R1c=1/(C1*z);
+R2c=1/(C2*p);
 R3c=10e3;
 R4c=K*R3;
 

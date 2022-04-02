@@ -65,10 +65,9 @@ g_c=K*tf([1 z1],[1 p1])*tf([1 z2],[1 p2])
 
 s_c=feedback(g_c*g,1);
 [p z] = pzmap(s_c)
-figure
 step(s_c,'k')
 hold on 
-step(sis_d,'.r')
+step(
 
 figure
 rlocus(g_c*g)
@@ -78,6 +77,9 @@ pzmap(s_c)
 
 
 %-----------amplificadores operacionales
+z1=0.5;
+p1=5;
+
 C1=10e-6;
 C2=C1;
 R1c=1/(p1*C1);
