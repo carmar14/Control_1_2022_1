@@ -9,7 +9,7 @@ g=tf(Kc,den);
 gl=feedback(g,1);
 figure
 step(gl)
-figure
+
 margin(g)
 grid on
 [Gm,Pm,Wcg,Wcp] = margin(g);

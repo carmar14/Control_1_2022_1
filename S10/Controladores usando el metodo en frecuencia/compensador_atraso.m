@@ -14,7 +14,7 @@ title('Respuesta en lazo cerrado del proceso sin compensador')
 
 %---------encontrar el MF y MG de K*G(s)
 K=5;
-g1=5*g;
+g1=K*g;
 figure
 margin(g1)
 
