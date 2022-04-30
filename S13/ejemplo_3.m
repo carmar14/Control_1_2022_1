@@ -3,7 +3,7 @@ clear
 close all
 
 % %----------control PD----------
-g=tf(4,[1 -6 0])
+g=tf(4,[1 -6 0]);
 
 %deseado
 Ts=8;
@@ -32,10 +32,16 @@ title('Control PD $G(s)=\frac{4}{s(s-6)}$','interpreter','latex')
 
 
 %----------control PID----------
+% pol_a=conv([1 1 3.189],[1 5]);
+% Kp=8.189/4;
+% Ti=4*Kp/15.945;
+% Td=12/(4*Kp);
+
 pol_a=conv([1 1 3.189],[1 50]);
 Kp=53.189/4;
 Ti=4*Kp/159.45;
 Td=57/(4*Kp);
+
 g_c=tf([Kp*Ti*Td Kp*Ti Kp],[Ti 0]);
 
 g_ol=g_c*g;
@@ -47,6 +53,9 @@ hold on
 step(g_d,'r')
 legend('Compensado','Deseado')
 title('Control PID $G(s)=\frac{4}{s(s-6)}$','interpreter','latex')
+
+figure
+pzmap(g_cl)
 
 % %----------control PID----------
 

@@ -14,7 +14,6 @@ so=13/100;
 e=sqrt((log(so))^2/(pi^2+(log(so))^2));
 wn=4/(Ts*e);
 g_d=tf(wn^2,[1 2*e*wn wn^2]);
-hold on
 step(g_cl,'b')
 step(g_d,'r')
 legend('Sin compensar','sin compensar en CL','Deseado')
@@ -38,6 +37,7 @@ hold on
 step(g_d,'r')
 legend('Compensado','Deseado')
 [p z]=pzmap(sis_cl)
-
+figure
+pzmap(sis_cl)
 
 
