@@ -70,6 +70,7 @@ step(sis_cl,'k')
 P_cr=2.8;
 %-----------controlador p-----
 K_p=0.5*K_cr;
+K_p=K_p/2;
 g_c=tf(K_p,1);
 sis_ol=g_c*g;
 sis_cl=feedback(sis_ol,1);
@@ -79,6 +80,7 @@ step(sis_cl,'k')
 
 %------controlador PI----
 K_p=0.45*K_cr;
+K_p=K_p/2;
 T_i=P_cr/1.2;
 g_c=tf([K_p*T_i K_p],[T_i 0]);
 sis_ol=g_c*g;
@@ -88,6 +90,7 @@ step(sis_cl,'r')
 
 %------controlador PID----
 K_p=0.6*K_cr;
+K_p=K_p/2;
 T_i=0.5*P_cr;
 T_d=0.125*P_cr;
 g_c=tf([K_p*T_i*T_d K_p*T_i K_p], [T_i 0]); 
