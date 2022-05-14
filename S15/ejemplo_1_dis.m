@@ -36,16 +36,17 @@ step(sis_cl,'k')
 hold on
 step(g_d,'r')
 legend('Compensado','Deseado')
+title('Respuesta del sistema en continuo')
 [p z]=pzmap(sis_cl)
 
 
 %--------------------discretizar----------------
 %----------w=ancho de banda en lazo cerrado---
 w=14.3;
-ws=2*14.3;
+ws=2*w;
 Ts=pi/ws; %nyquist
 Ts=1/50;%0.169/10; %empirico
-% Ts=1/50;
+% Ts=0.169/10;
 % Ts=1/10;  %1/10 foh
 gc_d=c2d(g_c,Ts,'zoh');
 gp_d=c2d(g,Ts,'zoh');
@@ -56,10 +57,12 @@ step(sis_cl_d,'k')
 hold on
 step(g_d,'r')
 legend('Compensado','Deseado')
+title('Respuesta del sistema en discreto')
 
 figure
 step(sis_cl_d,'k')
 hold on
+
 step(sis_cl,'b')
 legend('Discreto','Continuo')
 %--------------------discretizar----------------
@@ -118,3 +121,15 @@ hold on
 step(sis_cl_d,'k')
 step(sis_cl,'b')
 legend('algoritmo','Discreto','Continuo')
+
+
+%-------prueba con datos----
+tiempo = out.simout.time;
+u = out.simout.signals.values(:,1);  
+y_r = out.simout.signals.values(:,2); 
+y_sim=lsim(sis_cl_d,u,tiempo);
+
+figure
+plot(tiempo,y_sim,'k')
+hold on
+plot(tiempo,y_r,'.r')
