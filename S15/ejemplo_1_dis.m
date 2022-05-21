@@ -43,8 +43,8 @@ title('Respuesta del sistema en continuo')
 %--------------------discretizar----------------
 %----------w=ancho de banda en lazo cerrado---
 w=14.3;
-ws=2*w;
-Ts=pi/ws; %nyquist
+ws=w/2;
+Ts=pi/w;%0.5*2*pi/w; %nyquist
 Ts=1/50;%0.169/10; %empirico
 % Ts=0.169/10;
 % Ts=1/10;  %1/10 foh
