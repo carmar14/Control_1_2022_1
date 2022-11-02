@@ -81,7 +81,7 @@ void setup() {
   Serial.begin(115200);
   //Timer2.attachInterrupt(controlador);
   //Timer3.start(50000); // Calls every 50ms
-  //Timer2.start(10000);
+  //Timer2.start(20000);
 }
 
 void loop() {
@@ -90,7 +90,7 @@ void loop() {
 
     controlador();
     delay(Ts*1000);
-    //delay(Ts);
+    //delay(Ts*1000);
   }
 
 

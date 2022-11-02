@@ -28,6 +28,28 @@ B=(sind(phi)+1)/(1-sind(phi));
 p2=1/(B*T2);
 
 %encontrar z_1 y p_1
+%---------trazar recta----
+%--------encontrar  |Kc*G(jwm)|dB----------
+% [mag,phase,wout]=bode(Kc*g);
+% [m n p]=size(mag);
+% mag= reshape(20*log10(mag),[p 1]);
+% tol=0.02;
+% th=w;
+% [ii,jj]=find(abs(wout-th)<tol)
+% x_ini=w;%wout(ii(2));
+% x_fin=10*x_ini;
+% x=[x_ini: 0.001: x_fin];
+% y= abs((Kc*20)./((j*x).^3+3*(j*x).^2+2*j*x));
+% y = -20*log10(y);
+% figure
+% semilogx(wout,mag);
+% hold on
+% semilogx(x,y,'r');
+% grid on
+% xlim([x_ini x_fin])
+% figure
+% bode(Kc*g)
+
 z1=0.5; %0.6
 p1=5; %6
 num=conv([1 z1],[1 z2]);
