@@ -57,13 +57,25 @@ step(sso,'b')
 figure
 pzmap(sso)
 figure
-za = tf([-1/50 1],1);  % probar con 10%, 5% 2%
+za = tf([-1/5 1],1);  % probar con 10%, 5% 2%
 pzmap(sso*za)
 %subplot(3,1,2)
 figure
 step(sso,'k')
 hold on
 step(sso*za, '.r')
+
+figure
+step(sso,'b');
+hold on
+step(sso*za,'--r')
+legend('original', 'con cero')
+
+figure 
+pzmap(sso,'b')
+hold on
+pzmap(sso*za,'r')
+legend('original', 'con cero')
 
 pa = tf(1,[1/0.0006 1]);
 figure
@@ -85,6 +97,20 @@ h1=tf(wn1^2,[1 2*e1*wn1 wn1^2]);
 e2=0.6;
 wn2=1;
 h2=tf(wn2^2,[1 2*e2*wn2 wn2^2]);
+figure
+step(h1,'k');
+hold on
+step(h1*h2,'.r');
+
+figure
+
+pzmap(h1*h2)
+
+e1=0.2;
+wn1=2;
+h1=tf(wn1^2,[1 2*e1*wn1 wn1^2]);
+tao = 1/0.6;
+h2=tf(1,[tao 1]);
 figure
 step(h1,'k');
 hold on
