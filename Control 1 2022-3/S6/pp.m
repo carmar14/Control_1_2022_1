@@ -42,8 +42,8 @@ pzmap(hn,'r')
 %----------p3 G52---------
 h=tf(3,[1 0 2 3 4]);
 
-% figure
-% rlocus(h)
+figure
+rlocus(h)
 k=2;
 hcl = feedback(h*k,1);
 figure
