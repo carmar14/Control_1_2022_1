@@ -21,8 +21,8 @@ step(gr)
 [p z] = pzmap(gr);
 
 %polos dominantes: 
-s1=-0.33+0.586*i;
-s2=-0.33-0.586*i;
+s1=p(2);%-0.33+0.586*i;
+s2=p(3);%-0.33-0.586*i;
 
 %polinomio caracteristico:
 pol = conv([1 -s1],[1 -s2])
@@ -31,7 +31,8 @@ wn=sqrt(pol(3))
 e=pol(2)/(2*wn)
 
 sis_d=tf(wn^2,pol); %sistema deseado
-
+hold on
+step(sis_d,'r')
 
 so = 100*exp(-e*pi/sqrt(1-e^2))
 Ts= 4/(e*wn)
@@ -48,7 +49,7 @@ z=razon*p; %0.05;
 
 cond_ang= rad2deg(angle((s1+z)/(s1+p)))
 %atand((0.33-0.05)/0.586)-atand((0.33-0.005)/0.586)
-
+cond_ang=cond_ang+rad2deg(angle(1.06/(s1^3 + 3*s1^2 + 2*s1)));
 
 g_c = tf([1 z],[1 p]);
 
@@ -69,8 +70,8 @@ pzmap(sis_rc)
 title('Mapa de polos y ceros con compensador')
 
 % determinar la ganancia K para ubicar los polos deseados en lazo cerrado
-% s1= -0.309+0.56*i;%0.332+0.466*i;
-% s2= -0.309+0.56*i;%0.332-0.466*i;
+%s1= -0.309+0.56*i;%0.332+0.466*i;
+%s2= -0.309+0.56*i;%0.332-0.466*i;
 s1= p1(2);%-0.308+0.566i;%p1(2);%-0.332+0.466*i;
 s2= p1(3);%-0.332-0.466*i;
 num = 1.06*(s1+z);

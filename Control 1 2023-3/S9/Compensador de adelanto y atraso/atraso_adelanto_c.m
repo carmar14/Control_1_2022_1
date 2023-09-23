@@ -35,7 +35,7 @@ t2=90+atand(2/4.33);
 t1+t2
 angf=180-ang;%-180+t1+t2
 %---------encontrando el cero y el polo---
-phi = 90; %114.7966; %angulo del cero 
+phi = 115;%114; %114.7966; %angulo del cero 
 theta = phi-angf; %angulo del polo para completar lo que falta
 
 if phi<=90
@@ -55,6 +55,7 @@ p1=p;
 % phi=90+atand(2/4.33);
 % t3=phi-af
 % x=4.33/tand(t3)
+ang = rad2deg(angle(4*(s1+z1)/(s1*(s1+0.5)*(s1+p1))));
 %---------encontrando el cero y el polo---
 
 %---------econtrando K----
@@ -68,7 +69,7 @@ K=1/div;
 Kvd=80;
 razon=Kvd/(8*K);
 p2=0.002;
-z2=p2*razon;%0.2; %0.2
+z2=p2*razon*p1/z1;%0.2; %0.2
 num=s1+z2;
 % p2=z2/16;
 den=s1+p2;
@@ -89,6 +90,7 @@ g_c=K*tf([1 z1],[1 p1])*tf([1 z2],[1 p2]);%K*tf([1 0.5],[1 5])*tf([1 0.2],[1 0.0
 s_c=feedback(g_c*g,1);
 [p z] = pzmap(s_c)
 step(s_c,'k')
+
 
 figure
 rlocus(g_c*g)
